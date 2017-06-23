@@ -16,13 +16,12 @@
 
 package com.example.android.lifecycles.step3;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModel;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
-
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.ViewModel;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -53,7 +52,8 @@ public class LiveDataTimerViewModel extends ViewModel {
                     @Override
                     public void run() {
 
-                        //TODO set the new value
+                        // Sets the new time value.
+                        mElapsedTime.setValue(newValue);
 
                     }
                 });
@@ -62,7 +62,6 @@ public class LiveDataTimerViewModel extends ViewModel {
 
     }
 
-    @SuppressWarnings("unused")  // Will be used when step is completed
     public LiveData<Long> getElapsedTime() {
         return mElapsedTime;
     }

@@ -16,14 +16,14 @@
 
 package com.example.android.lifecycles.step3;
 
+import android.arch.lifecycle.LifecycleActivity;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.TextView;
 
-import android.arch.lifecycle.LifecycleActivity;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import com.example.android.codelabs.lifecycle.R;
 
 
@@ -46,7 +46,7 @@ public class ChronoActivity3 extends LifecycleActivity {
         final Observer<Long> elapsedTimeObserver = new Observer<Long>() {
             @Override
             public void onChanged(@Nullable final Long aLong) {
-                String newText = ChronoActivity3.this.getResources().getString(
+                final String newText = ChronoActivity3.this.getResources().getString(
                         R.string.seconds, aLong);
                 ((TextView) findViewById(R.id.timer_textview)).setText(newText);
                 Log.d("ChronoActivity3", "Updating timer");
@@ -54,5 +54,6 @@ public class ChronoActivity3 extends LifecycleActivity {
         };
 
         //TODO: observe the ViewModel's elapsed time
+        mLiveDataTimerViewModel.getElapsedTime().observe(this, elapsedTimeObserver);
     }
 }
